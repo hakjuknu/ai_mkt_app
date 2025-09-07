@@ -33,8 +33,8 @@ export function getHistory(): HistoryItem[] {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) return [];
     
-    const history = JSON.parse(stored);
-    return history.map((item: any) => ({
+    const history = JSON.parse(stored) as HistoryItem[];
+    return history.map((item) => ({
       ...item,
       createdAt: new Date(item.createdAt),
     }));

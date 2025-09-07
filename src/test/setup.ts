@@ -30,8 +30,8 @@ vi.mock('next/navigation', () => ({
 
 // Next.js Link 모킹
 vi.mock('next/link', () => ({
-  default: ({ children, href, ...props }: any) => {
-    const React = require('react');
+  default: ({ children, href, ...props }: { children: React.ReactNode; href: string; [key: string]: unknown }) => {
+    const React = import('react');
     return React.createElement('a', { href, ...props }, children);
   },
 }));
@@ -60,7 +60,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 // console.error 억제 (테스트 중 불필요한 에러 로그 방지)
 const originalError = console.error;
 beforeAll(() => {
-  console.error = (...args: any[]) => {
+  console.error = (...args: unknown[]) => {
     if (
       typeof args[0] === 'string' &&
       args[0].includes('Warning: ReactDOM.render is no longer supported')

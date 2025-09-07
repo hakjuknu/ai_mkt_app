@@ -33,7 +33,7 @@ export const createMockMarketingResponse = (overrides = {}) => ({
 });
 
 // API Mock 헬퍼
-export const mockFetch = (response: any, status = 200) => {
+export const mockFetch = (response: unknown, status = 200) => {
   const mockResponse = {
     ok: status >= 200 && status < 300,
     status,
@@ -41,7 +41,7 @@ export const mockFetch = (response: any, status = 200) => {
     text: vi.fn().mockResolvedValue(JSON.stringify(response)),
   };
   
-  vi.mocked(fetch).mockResolvedValue(mockResponse as any);
+  vi.mocked(fetch).mockResolvedValue(mockResponse as Response);
   return mockResponse;
 };
 
@@ -53,27 +53,27 @@ export const mockFetchError = (error: string, status = 500) => {
     text: vi.fn().mockResolvedValue(JSON.stringify({ error })),
   };
   
-  vi.mocked(fetch).mockResolvedValue(mockResponse as any);
+  vi.mocked(fetch).mockResolvedValue(mockResponse as Response);
   return mockResponse;
 };
 
 // 폼 테스트 헬퍼
-export const fillMarketingForm = async (user: any, formData: any) => {
+export const fillMarketingForm = async (user: { clear: (element: Element) => Promise<void>; type: (element: Element, text: string) => Promise<void>; click: (element: Element) => Promise<void> }, formData: Record<string, unknown>) => {
   // 가치 제언 입력
   const valuePropositionTextarea = document.querySelector('textarea[name="valueProposition"]');
   if (valuePropositionTextarea) {
     await user.clear(valuePropositionTextarea);
-    await user.type(valuePropositionTextarea, formData.valueProposition);
+    await user.type(valuePropositionTextarea, String(formData.valueProposition));
   }
 
   // 성별 선택
-  const genderRadio = document.querySelector(`input[value="${formData.gender}"]`);
+  const genderRadio = document.querySelector(`input[value="${String(formData.gender)}"]`);
   if (genderRadio) {
     await user.click(genderRadio);
   }
 
   // 연령대 선택
-  const ageGroupRadio = document.querySelector(`input[value="${formData.ageGroup}"]`);
+  const ageGroupRadio = document.querySelector(`input[value="${String(formData.ageGroup)}"]`);
   if (ageGroupRadio) {
     await user.click(ageGroupRadio);
   }
@@ -82,20 +82,20 @@ export const fillMarketingForm = async (user: any, formData: any) => {
   const platformSelect = document.querySelector('[role="combobox"]');
   if (platformSelect) {
     await user.click(platformSelect);
-    const platformOption = document.querySelector(`[data-value="${formData.platform}"]`);
+    const platformOption = document.querySelector(`[data-value="${String(formData.platform)}"]`);
     if (platformOption) {
       await user.click(platformOption);
     }
   }
 
   // 톤 선택
-  const toneRadio = document.querySelector(`input[value="${formData.tone}"]`);
+  const toneRadio = document.querySelector(`input[value="${String(formData.tone)}"]`);
   if (toneRadio) {
     await user.click(toneRadio);
   }
 
   // 길이 선택
-  const lengthRadio = document.querySelector(`input[value="${formData.length}"]`);
+  const lengthRadio = document.querySelector(`input[value="${String(formData.length)}"]`);
   if (lengthRadio) {
     await user.click(lengthRadio);
   }
@@ -104,7 +104,7 @@ export const fillMarketingForm = async (user: any, formData: any) => {
   const goalSelect = document.querySelectorAll('[role="combobox"]')[1];
   if (goalSelect) {
     await user.click(goalSelect);
-    const goalOption = document.querySelector(`[data-value="${formData.goal}"]`);
+    const goalOption = document.querySelector(`[data-value="${String(formData.goal)}"]`);
     if (goalOption) {
       await user.click(goalOption);
     }
