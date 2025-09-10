@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Copy, Check, Download, Search, Filter, RefreshCw, Volume2 } from "lucide-react";
+import { Copy, Check, Download, Search, RefreshCw } from "lucide-react";
 import { CompactTTSPlayer } from "@/components/compact-tts-player";
 import type { MarketingResponse } from "@/types/marketing";
 
@@ -29,7 +29,7 @@ export interface AllResultsData {
   errorCount: number;
 }
 
-export function AllResultsDisplay({ results, isLoading = false, onRegenerate }: AllResultsDisplayProps) {
+export function AllResultsDisplay({ results, isLoading = false }: AllResultsDisplayProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterPlatform, setFilterPlatform] = useState<string>("all");
   const [filterTone, setFilterTone] = useState<string>("all");
@@ -69,7 +69,7 @@ export function AllResultsDisplay({ results, isLoading = false, onRegenerate }: 
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground text-center py-8">
-            "모든 옵션으로 문구 생성" 버튼을 클릭하여 시작하세요.
+            &quot;모든 옵션으로 문구 생성&quot; 버튼을 클릭하여 시작하세요.
           </p>
         </CardContent>
       </Card>

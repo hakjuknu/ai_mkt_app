@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '../../test/utils';
 import userEvent from '@testing-library/user-event';
 import { MarketingForm } from '../marketing-form';
-import { createMockMarketingFormData } from '../../test/utils';
+// import { createMockMarketingFormData } from '../../test/utils';
 
 // Mock 함수들
 const mockOnSubmit = vi.fn();
