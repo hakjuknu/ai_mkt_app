@@ -11,7 +11,7 @@ interface LogEntry {
   level: LogLevel;
   message: string;
   timestamp: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   error?: Error;
 }
 
@@ -46,7 +46,7 @@ class Logger {
     return formatted;
   }
 
-  private log(level: LogLevel, message: string, context?: Record<string, any>, error?: Error): void {
+  private log(level: LogLevel, message: string, context?: Record<string, unknown>, error?: Error): void {
     if (!this.shouldLog(level)) return;
 
     const entry: LogEntry = {
@@ -85,25 +85,26 @@ class Logger {
     try {
       // 여기에 Sentry, LogRocket, DataDog 등의 로깅 서비스 연동
       // 예시: Sentry.captureException(entry.error);
-      console.log('External logging service integration needed');
-    } catch (error) {
-      console.error('Failed to send log to external service:', error);
+      // 실제 연동 전까지는 noop 처리
+      void entry;
+    } catch (err) {
+      console.error('Failed to send log to external service:', err);
     }
   }
 
-  debug(message: string, context?: Record<string, any>): void {
+  debug(message: string, context?: Record<string, unknown>): void {
     this.log(LogLevel.DEBUG, message, context);
   }
 
-  info(message: string, context?: Record<string, any>): void {
+  info(message: string, context?: Record<string, unknown>): void {
     this.log(LogLevel.INFO, message, context);
   }
 
-  warn(message: string, context?: Record<string, any>): void {
+  warn(message: string, context?: Record<string, unknown>): void {
     this.log(LogLevel.WARN, message, context);
   }
 
-  error(message: string, error?: Error, context?: Record<string, any>): void {
+  error(message: string, error?: Error, context?: Record<string, unknown>): void {
     this.log(LogLevel.ERROR, message, context, error);
   }
 }
@@ -115,7 +116,7 @@ export const logger = new Logger(
 
 // API 라우트용 헬퍼 함수들
 export const apiLogger = {
-  request: (method: string, url: string, body?: any) => {
+  request: (method: string, url: string, body?: unknown) => {
     logger.info('API Request', {
       method,
       url,
@@ -123,7 +124,7 @@ export const apiLogger = {
     });
   },
 
-  response: (status: number, responseTime: number, data?: any) => {
+  response: (status: number, responseTime: number, data?: unknown) => {
     logger.info('API Response', {
       status,
       responseTime: `${responseTime}ms`,
@@ -131,14 +132,14 @@ export const apiLogger = {
     });
   },
 
-  error: (error: Error, context?: Record<string, any>) => {
+  error: (error: Error, context?: Record<string, unknown>) => {
     logger.error('API Error', error, context);
   },
 };
 
 // 마케팅 생성 관련 로깅
 export const marketingLogger = {
-  generationStart: (input: any) => {
+  generationStart: (input: { platform: string; tone: string; length: string; goal: string }) => {
     logger.info('Marketing generation started', {
       platform: input.platform,
       tone: input.tone,
@@ -147,7 +148,11 @@ export const marketingLogger = {
     });
   },
 
-  generationSuccess: (input: any, output: any, responseTime: number) => {
+  generationSuccess: (
+    input: { platform: string; tone: string; length: string; goal: string },
+    output: { marketing_copy?: string },
+    responseTime: number,
+  ) => {
     logger.info('Marketing generation successful', {
       platform: input.platform,
       tone: input.tone,
@@ -158,7 +163,7 @@ export const marketingLogger = {
     });
   },
 
-  generationError: (error: Error, input: any) => {
+  generationError: (error: Error, input: { platform: string; tone: string; length: string; goal: string }) => {
     logger.error('Marketing generation failed', error, {
       platform: input.platform,
       tone: input.tone,
@@ -181,7 +186,7 @@ export const marketingLogger = {
     });
   },
 
-  batchGenerationComplete: (results: any[], responseTime: number) => {
+  batchGenerationComplete: (results: Array<{ error?: unknown }>, responseTime: number) => {
     logger.info('Batch generation completed', {
       totalResults: results.length,
       successCount: results.filter(r => !r.error).length,

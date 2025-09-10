@@ -101,3 +101,4 @@ export function getValuePropositionByCategory(category: string): string {
   return SAMPLE_VALUE_PROPOSITIONS[randomIndex];
 }
 
+

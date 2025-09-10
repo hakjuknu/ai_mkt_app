@@ -21,7 +21,6 @@ export function rateLimit(config: RateLimitConfig = DEFAULT_CONFIG) {
   return (request: NextRequest): { success: boolean; message?: string; remaining?: number } => {
     const clientId = getClientId(request);
     const now = Date.now();
-    const windowStart = now - config.windowMs;
 
     // 클라이언트별 요청 기록 가져오기
     const clientData = requestCounts.get(clientId) || { count: 0, resetTime: now + config.windowMs };
@@ -76,4 +75,5 @@ export function cleanupRateLimit() {
 if (typeof window === "undefined") {
   setInterval(cleanupRateLimit, 5 * 60 * 1000);
 }
+
 
