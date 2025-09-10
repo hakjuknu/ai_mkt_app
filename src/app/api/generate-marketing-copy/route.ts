@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import { env, validateOpenAIKey } from "@/lib/config/env";
+// import { env, validateOpenAIKey } from "@/lib/config/env";
 import { rateLimit } from "@/lib/rate-limit";
 import { setCorsHeaders, handleCors } from "@/lib/cors";
 import { apiLogger, marketingLogger } from "@/lib/logger";

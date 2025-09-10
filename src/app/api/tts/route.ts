@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     // OpenAI TTS API 호출
     const mp3 = await openai.audio.speech.create({
       model: model,
-      voice: voice as any,
+      voice: voice,
       input: text,
       response_format: "mp3",
     });
@@ -98,8 +98,8 @@ export async function POST(request: NextRequest) {
       success: true,
       audio: base64Audio,
       format: "mp3",
-      voice: voice as Voice,
-      model: model as any,
+      voice: voice,
+      model: model,
       textLength: text.length
     };
     

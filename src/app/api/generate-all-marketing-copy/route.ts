@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import { env, validateOpenAIKey } from "@/lib/config/env";
+// import { env, validateOpenAIKey } from "@/lib/config/env";
 import { rateLimit } from "@/lib/rate-limit";
 import { setCorsHeaders, handleCors } from "@/lib/cors";
 import { apiLogger, marketingLogger } from "@/lib/logger";
-import type { MarketingRequest, MarketingResponse } from "@/types/marketing";
+import type { MarketingRequest } from "@/types/marketing";
 import { 
   GENDER_OPTIONS, 
   AGE_GROUP_OPTIONS, 
@@ -19,34 +19,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY?.trim().replace(/\n/g, ''),
 });
 
-// 모든 옵션 조합 생성
-function generateAllCombinations(valueProposition: string) {
-  const combinations = [];
-  
-  for (const gender of GENDER_OPTIONS) {
-    for (const ageGroup of AGE_GROUP_OPTIONS) {
-      for (const platform of PLATFORM_OPTIONS) {
-        for (const tone of TONE_OPTIONS) {
-          for (const length of LENGTH_OPTIONS) {
-            for (const goal of GOAL_OPTIONS) {
-              combinations.push({
-                valueProposition,
-                gender: gender.value,
-                ageGroup: ageGroup.value,
-                platform: platform.value,
-                tone: tone.value,
-                length: length.value,
-                goal: goal.value,
-              });
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  return combinations;
-}
+// 모든 옵션 조합 생성 (현재는 사용하지 않음)
 
 // 제한된 옵션 조합 생성 (성능을 위해 일부 옵션만 선택)
 function generateLimitedCombinations(valueProposition: string) {

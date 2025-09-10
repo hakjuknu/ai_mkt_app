@@ -253,7 +253,7 @@ export default function MarketingGeneratorPage() {
                 <div>
                   <h4 className="font-medium mb-1">✨ 자동 샘플 문구</h4>
                   <p className="text-muted-foreground">
-                    매번 접속할 때마다 다양한 샘플 문구가 자동으로 입력됩니다. "새로운 문구 생성" 버튼으로 언제든 변경 가능합니다.
+                    매번 접속할 때마다 다양한 샘플 문구가 자동으로 입력됩니다. &quot;새로운 문구 생성&quot; 버튼으로 언제든 변경 가능합니다.
                   </p>
                 </div>
                 <div>
