@@ -74,7 +74,7 @@ export function ResultDisplay({ result, isLoading = false, onRegenerate }: Resul
         <CardHeader>
           <CardTitle>생성된 문구가 없습니다</CardTitle>
           <CardDescription>
-            위의 폼을 작성하고 "마케팅 문구 생성하기" 버튼을 클릭하세요.
+            위의 폼을 작성하고 &quot;마케팅 문구 생성하기&quot; 버튼을 클릭하세요.
           </CardDescription>
         </CardHeader>
       </Card>

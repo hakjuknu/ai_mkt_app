@@ -117,7 +117,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
               <Label className="text-base font-medium">{FORM_LABELS.GENDER}</Label>
               <RadioGroup
                 value={watchedValues.gender}
-                onValueChange={(value) => setValue("gender", value as any)}
+                onValueChange={(value) => setValue("gender", value as typeof watchedValues.gender)}
               >
                 <div className="grid grid-cols-3 gap-3">
                   {GENDER_OPTIONS.map((option) => (
@@ -140,7 +140,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
               <Label className="text-base font-medium">{FORM_LABELS.AGE_GROUP}</Label>
               <RadioGroup
                 value={watchedValues.ageGroup}
-                onValueChange={(value) => setValue("ageGroup", value as any)}
+                onValueChange={(value) => setValue("ageGroup", value as typeof watchedValues.ageGroup)}
               >
                 <div className="grid grid-cols-2 gap-3">
                   {AGE_GROUP_OPTIONS.map((option) => (
@@ -164,7 +164,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
             <Label className="text-base font-medium">{FORM_LABELS.PLATFORM}</Label>
             <Select
               value={watchedValues.platform}
-              onValueChange={(value) => setValue("platform", value as any)}
+              onValueChange={(value) => setValue("platform", value as typeof watchedValues.platform)}
             >
               <SelectTrigger>
                 <SelectValue placeholder="플랫폼을 선택하세요" />
@@ -187,7 +187,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
             <Label className="text-base font-medium">{FORM_LABELS.TONE}</Label>
             <RadioGroup
               value={watchedValues.tone}
-              onValueChange={(value) => setValue("tone", value as any)}
+              onValueChange={(value) => setValue("tone", value as typeof watchedValues.tone)}
             >
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {TONE_OPTIONS.map((option) => (
@@ -213,7 +213,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
             <Label className="text-base font-medium">{FORM_LABELS.LENGTH}</Label>
             <RadioGroup
               value={watchedValues.length}
-              onValueChange={(value) => setValue("length", value as any)}
+              onValueChange={(value) => setValue("length", value as typeof watchedValues.length)}
             >
               <div className="grid grid-cols-3 gap-3">
                 {LENGTH_OPTIONS.map((option) => (
@@ -236,7 +236,7 @@ export function MarketingForm({ onSubmit, onGenerateAll, isLoading = false, isGe
             <Label className="text-base font-medium">{FORM_LABELS.GOAL}</Label>
             <Select
               value={watchedValues.goal}
-              onValueChange={(value) => setValue("goal", value as any)}
+              onValueChange={(value) => setValue("goal", value as typeof watchedValues.goal)}
             >
               <SelectTrigger>
                 <SelectValue placeholder="목적을 선택하세요" />
