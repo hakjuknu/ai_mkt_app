@@ -87,6 +87,7 @@ JSON 형식으로 응답하되, marketing_copy 필드에 생성된 문구를 넣
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
+  let body: MarketingRequest | null = null;
   
   try {
     // 요청 로깅
@@ -120,9 +121,9 @@ export async function POST(request: NextRequest) {
     }
 
     // 요청 데이터 파싱
-    const body: MarketingRequest = await request.json();
+    body = await request.json();
     
-    if (!body.input) {
+    if (!body || !body.input) {
       const response = NextResponse.json(
         { error: "입력 데이터가 올바르지 않습니다." },
         { status: 400 }
@@ -194,7 +195,9 @@ export async function POST(request: NextRequest) {
     const errorInstance = error instanceof Error ? error : new Error(String(error));
     
     // 에러 로깅
-    marketingLogger.generationError(errorInstance, body?.input || {});
+    if (body?.input) {
+      marketingLogger.generationError(errorInstance, body.input);
+    }
     apiLogger.error(errorInstance, { responseTime });
     
     // OpenAI API 오류 처리

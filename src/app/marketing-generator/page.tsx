@@ -13,7 +13,7 @@ import { ArrowLeft, AlertCircle, History, BarChart3 } from "lucide-react";
 import Link from "next/link";
 import { saveToHistory } from "@/lib/storage/history";
 import { analytics } from "@/lib/analytics";
-import type { MarketingFormSchema, MarketingResponse } from "@/types/marketing";
+import type { MarketingFormData, MarketingResponse } from "@/types/marketing";
 
 export default function MarketingGeneratorPage() {
   const [result, setResult] = useState<MarketingResponse | null>(null);
@@ -24,7 +24,7 @@ export default function MarketingGeneratorPage() {
   const [showHistory, setShowHistory] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
 
-  const handleFormSubmit = async (data: MarketingFormSchema) => {
+  const handleFormSubmit = async (data: MarketingFormData) => {
     const startTime = Date.now();
     setIsLoading(true);
     setError(null);
@@ -80,7 +80,7 @@ export default function MarketingGeneratorPage() {
     }
   };
 
-  const handleGenerateAll = async (data: MarketingFormSchema) => {
+  const handleGenerateAll = async (data: MarketingFormData) => {
     const startTime = Date.now();
     setIsGeneratingAll(true);
     setError(null);

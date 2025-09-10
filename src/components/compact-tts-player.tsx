@@ -122,7 +122,7 @@ export function CompactTTSPlayer({ text, className }: TTSPlayerProps) {
     <div className={cn("space-y-3", className)}>
       {/* 음성 선택 및 생성 버튼 */}
       <div className="flex items-center gap-2">
-        <Select value={selectedVoice} onValueChange={setSelectedVoice}>
+        <Select value={selectedVoice} onValueChange={(value) => setSelectedVoice(value as Voice)}>
           <SelectTrigger className="w-32 h-8 text-xs">
             <SelectValue />
           </SelectTrigger>

@@ -1,4 +1,6 @@
 import '@testing-library/jest-dom';
+import { vi, beforeAll, afterAll } from 'vitest';
+import React from 'react';
 
 // 테스트 환경 설정
 Object.defineProperty(window, 'matchMedia', {
@@ -31,7 +33,6 @@ vi.mock('next/navigation', () => ({
 // Next.js Link 모킹
 vi.mock('next/link', () => ({
   default: ({ children, href, ...props }: { children: React.ReactNode; href: string; [key: string]: unknown }) => {
-    const React = import('react');
     return React.createElement('a', { href, ...props }, children);
   },
 }));

@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
+import { vi } from 'vitest';
 
 // 테스트용 래퍼 컴포넌트
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
@@ -41,7 +42,7 @@ export const mockFetch = (response: unknown, status = 200) => {
     text: vi.fn().mockResolvedValue(JSON.stringify(response)),
   };
   
-  vi.mocked(fetch).mockResolvedValue(mockResponse as Response);
+  vi.mocked(fetch).mockResolvedValue(mockResponse as unknown as Response);
   return mockResponse;
 };
 
@@ -53,7 +54,7 @@ export const mockFetchError = (error: string, status = 500) => {
     text: vi.fn().mockResolvedValue(JSON.stringify({ error })),
   };
   
-  vi.mocked(fetch).mockResolvedValue(mockResponse as Response);
+  vi.mocked(fetch).mockResolvedValue(mockResponse as unknown as Response);
   return mockResponse;
 };
 

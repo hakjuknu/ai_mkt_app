@@ -135,7 +135,7 @@ export function TTSPlayer({ text, className }: TTSPlayerProps) {
         {/* 음성 선택 */}
         <div className="space-y-2">
           <label className="text-sm font-medium">음성 선택</label>
-          <Select value={selectedVoice} onValueChange={setSelectedVoice}>
+          <Select value={selectedVoice} onValueChange={(value) => setSelectedVoice(value as Voice)}>
             <SelectTrigger>
               <SelectValue placeholder="음성을 선택하세요" />
             </SelectTrigger>

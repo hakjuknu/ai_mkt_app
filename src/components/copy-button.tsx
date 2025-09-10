@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 interface CopyButtonProps {
   text: string;
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "default" | "lg";
   variant?: "default" | "outline" | "ghost";
   showText?: boolean;
 }

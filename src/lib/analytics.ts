@@ -26,8 +26,9 @@ class Analytics {
     const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (entry.entryType === 'navigation') {
+          const navEntry = entry as PerformanceNavigationTiming;
           this.metrics = {
-            pageLoadTime: entry.loadEventEnd - entry.loadEventStart,
+            pageLoadTime: navEntry.loadEventEnd - navEntry.loadEventStart,
             firstContentfulPaint: 0,
             largestContentfulPaint: 0,
             cumulativeLayoutShift: 0,
