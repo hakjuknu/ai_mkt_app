@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MarketingForm } from "@/components/marketing-form";
 import { ResultDisplay } from "@/components/result-display";
-import { AllResultsDisplay } from "@/components/all-results-display";
+import { AllResultsDisplay, AllResultsData } from "@/components/all-results-display";
 import { HistoryPanel } from "@/components/history-panel";
 import { AnalyticsDashboard } from "@/components/analytics-dashboard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,7 +17,7 @@ import type { MarketingFormSchema, MarketingResponse } from "@/types/marketing";
 
 export default function MarketingGeneratorPage() {
   const [result, setResult] = useState<MarketingResponse | null>(null);
-  const [allResults, setAllResults] = useState<any>(null);
+  const [allResults, setAllResults] = useState<AllResultsData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isGeneratingAll, setIsGeneratingAll] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -100,7 +100,7 @@ export default function MarketingGeneratorPage() {
         throw new Error(errorData.error || "모든 옵션 문구 생성에 실패했습니다.");
       }
 
-      const resultData = await response.json();
+      const resultData: AllResultsData = await response.json();
       setAllResults(resultData);
       
       // 분석 데이터 추적

@@ -17,7 +17,7 @@ interface AllResultsDisplayProps {
   onRegenerate?: () => void;
 }
 
-interface AllResultsData {
+export interface AllResultsData {
   input: MarketingResponse["input"];
   results: Array<{
     input: MarketingResponse["input"];

@@ -33,7 +33,7 @@ export default function Home() {
               <span className="text-sm font-medium text-muted-foreground">샘플 가치 제언</span>
             </div>
             <p className="text-base leading-relaxed text-foreground">
-              "{getRandomValueProposition()}"
+              &quot;{getRandomValueProposition()}&quot;
             </p>
             <p className="text-xs text-muted-foreground mt-2">
               💡 매번 접속할 때마다 다른 샘플 문구가 자동으로 입력됩니다
