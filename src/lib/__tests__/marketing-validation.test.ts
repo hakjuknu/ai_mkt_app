@@ -39,42 +39,42 @@ describe('marketing validation', () => {
     });
 
     it('should reject data with invalid gender', () => {
-      const data = { ...validData, gender: 'invalid' as any };
+      const data = { ...validData, gender: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);
     });
 
     it('should reject data with invalid age group', () => {
-      const data = { ...validData, ageGroup: 'invalid' as any };
+      const data = { ...validData, ageGroup: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);
     });
 
     it('should reject data with invalid platform', () => {
-      const data = { ...validData, platform: 'invalid' as any };
+      const data = { ...validData, platform: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);
     });
 
     it('should reject data with invalid tone', () => {
-      const data = { ...validData, tone: 'invalid' as any };
+      const data = { ...validData, tone: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);
     });
 
     it('should reject data with invalid length', () => {
-      const data = { ...validData, length: 'invalid' as any };
+      const data = { ...validData, length: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);
     });
 
     it('should reject data with invalid goal', () => {
-      const data = { ...validData, goal: 'invalid' as any };
+      const data = { ...validData, goal: 'invalid' as never };
       const result = marketingFormSchema.safeParse(data);
       
       expect(result.success).toBe(false);

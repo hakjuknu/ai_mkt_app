@@ -15,10 +15,10 @@ const nextConfig: NextConfig = {
   compress: true,
 
   // 번들 분석기 설정
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: async (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // 프로덕션 빌드에서만 번들 분석기 활성화
     if (!dev && !isServer && process.env.ANALYZE === 'true') {
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      const { BundleAnalyzerPlugin } = await import('webpack-bundle-analyzer') as any;
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: 'static',
