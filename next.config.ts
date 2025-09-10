@@ -15,17 +15,21 @@ const nextConfig: NextConfig = {
   compress: true,
 
   // 번들 분석기 설정
-  webpack: async (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // 프로덕션 빌드에서만 번들 분석기 활성화
     if (!dev && !isServer && process.env.ANALYZE === 'true') {
-      const { BundleAnalyzerPlugin } = await import('webpack-bundle-analyzer') as any;
-      config.plugins.push(
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'static',
-          openAnalyzer: false,
-          reportFilename: './bundle-analysis.html',
-        })
-      );
+      try {
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+        config.plugins.push(
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false,
+            reportFilename: './bundle-analysis.html',
+          })
+        );
+      } catch (error) {
+        console.warn('BundleAnalyzerPlugin을 로드할 수 없습니다:', error);
+      }
     }
     return config;
   },
