@@ -11,7 +11,7 @@ export interface PerformanceMetrics {
 export interface UserInteraction {
   event: string;
   timestamp: number;
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
 }
 
 class Analytics {
@@ -62,8 +62,9 @@ class Analytics {
     let clsValue = 0;
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (!(entry as any).hadRecentInput) {
-          clsValue += (entry as any).value;
+        const layoutShiftEntry = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+        if (!layoutShiftEntry.hadRecentInput) {
+          clsValue += layoutShiftEntry.value ?? 0;
           if (this.metrics) {
             this.metrics.cumulativeLayoutShift = clsValue;
           }
@@ -73,7 +74,7 @@ class Analytics {
   }
 
   // 사용자 상호작용 추적
-  trackEvent(event: string, data?: Record<string, any>): void {
+  trackEvent(event: string, data?: Record<string, unknown>): void {
     if (typeof window === 'undefined') return;
 
     this.interactions.push({
